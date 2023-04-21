@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!-- saved from url=(0294)https://widget.reviews.co.uk/text-banner/widget?elementId=reviews-widget-summon-text-banner&version=undefinedb&&store=switchboard-free&starsClr=%23f47e27&textClr=%23595959&css=.ReviewsLogo-%2Dsmall%20.ReviewsLogo__text%20i%20%7Bcolor%3A%23595959%20!important%3B%7D&version=13b&logoClr=%23595959 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Reviews Text Banner</title>
+        <!-- <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/40686/revsglobal-pr-mod/style-cf.css"> -->
+        <link rel="stylesheet" href="./style-cf(1).css">
+        <link rel="stylesheet" href="./style-cf(2).css">
+
+        <link rel="stylesheet" href="./style(1).css">
+        <!-- <link rel="stylesheet" href="style.css?primary=undefined&neutral=undefined&textClr=%23595959&starsClr=MONO_MODE&version=13b" /> -->
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" type="text/css" href="css/ie8.css" />
+        <![endif]-->
+    </head>
+    <body data-new-gr-c-s-check-loaded="14.1105.0" data-gr-ext-installed="">
+        <div class="TextBanner">
+            <a style="display:inline-block;" href="http://www.reviews.co.uk/company-reviews/store/switchboard-free?utm_source=switchboard-free&amp;utm_medium=widget&amp;utm_campaign=text-banner" target="_blank">
+                <div>
+                    <span class="TextBanner__text TextBanner__text--customerssay ruk_customers_say">
+                        Our customers say
+                    </span>
+                    <span class="TextBanner__text TextBanner__text--verdict ruk_word">Excellent</span>
+                    <span class="TextBanner__stars RatingStars RatingStars--large"><i class="icon-percentage-star--100 RatingStars__star"></i> <i class="icon-percentage-star--100 RatingStars__star"></i> <i class="icon-percentage-star--100 RatingStars__star"></i> <i class="icon-percentage-star--100 RatingStars__star"></i> <i class="icon-percentage-star--100 RatingStars__star"></i> </span>
+                    <div class="noBreakWrap">
+                      <span class="TextBanner__text TextBanner__text--outof ruk_rating_out_of_5">
+                          <div class="ruk_rating">4.90</div>
+                          out of 5 based on
+                          <div class="ruk_count">1062</div>
+                          reviews
+                      </span><span class="ReviewsLogo ReviewsLogo--small">
+
+                        <img src="./reviewsio-logo.svg" style="width: 112px;"></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <script>
+
+            function translateRatingWord(word) {
+                switch(word)	{
+                    case 'Excellent':
+                      word = 'Excellent';
+                      break;
+                    case 'Good':
+                      word = 'Good';
+                      break;
+                    case 'Normal':
+                      word = 'Normal';
+                      break;
+                    case 'Poor':
+                      word = 'Poor';
+                      break;
+                    case 'Terrible':
+                      word = 'Terrible';
+                      break;
+                }
+                return word;
+            }
+
+            var xhttp = new XMLHttpRequest;
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    var data = JSON.parse(xhttp.responseText);
+
+                    if('company' == 'product') {
+                      averageRating = data.rating;
+                      switch(Math.ceil(data.rating)){
+                        case 5:
+                          ratingWord = 'Excellent';
+                          break;
+                        case 4:
+                          ratingWord = 'Good';
+                          break;
+                        case 3:
+                          ratingWord = 'Normal';
+                          break;
+                        case 2:
+                          ratingWord = 'Poor';
+                          break;
+                        case 1:
+                          ratingWord = 'Terrible';
+                          break;
+                      }
+                      totalReviews = data.count;
+                    } else {
+                      averageRating = data.stats.average_rating;
+                      ratingWord = data.word;
+                      totalReviews = data.stats.total_reviews;
+                    }
+
+                    var starsWraps = document.querySelectorAll(".starsWrap");
+                    for(var i=0;i<starsWraps.length;i++) {
+                        starsWraps[i].innerHTML = renderRating(averageRating);
+                    }
+
+                    var ratingWords = document.querySelectorAll(".ruk_word");
+                    for(var i=0;i<ratingWords.length;i++) {
+                        ratingWords[i].innerHTML = translateRatingWord(ratingWord);
+                    }
+
+                    var counts = document.querySelectorAll(".ruk_count");
+                    for(var i=0;i<counts.length;i++) {
+                        counts[i].innerHTML = totalReviews;
+                    }
+
+                    var ratings = document.querySelectorAll(".ruk_rating");
+                    for(var i=0;i<ratings.length;i++) {
+                        ratings[i].innerHTML = parseFloat(averageRating).toFixed(2).replace('.','.');
+                    }
+
+                    var badgeStars = document.querySelectorAll(".TextBanner__stars");
+                    for(var i=0;i<badgeStars.length;i++) {
+                        badgeStars[i].innerHTML = renderRating(parseFloat(averageRating).toFixed(2));
+                    }
+
+                    resize();
+                }
+            };
+
+            renderLogo();
+            if('company' == 'product') {
+              xhttp.open("GET", "https://api.reviews.co.uk/product/reviews/all?store=switchboard-free&limit=1&tag=&branch=", true);
+            } else {
+              xhttp.open("GET", "https://api.reviews.co.uk/merchant/latest?store=switchboard-free&limit=21&tag=&branch=", true);
+            }
+            xhttp.send();
+
+            function renderRating(rating) {
+
+                // Round to nearest quater
+                rating = Math.round(rating * 4)/4;
+
+                var html = '';
+                for(i=1; i<=5; i++){
+                        if(i <= rating){
+                              html += '<i class="icon-percentage-star--100 RatingStars__star"></i> ';
+                        } else if(i - 0.25 <= rating) {
+    						            html += '<i class="icon-percentage-star--75 RatingStars__star"></i> ';
+                        } else if(i - 0.5 <= rating) {
+    						            html += '<i class="icon-percentage-star--50 RatingStars__star"></i> ';
+                        } else if(i - 0.75 <= rating) {
+    						            html += '<i class="icon-percentage-star--25 RatingStars__star"></i> ';
+                        } else {
+                            html += '<i class="icon-percentage-star--0 RatingStars__star"></i> ';
+                        }
+                }
+                return html;
+            };
+
+            function renderLogo() {
+
+                var logo = document.createElement('IMG');
+                logo.src = 'https://assets.reviews.io/img/all-global-assets/logo/reviewsio-logo.svg';
+                logo.style.width = '112px';
+
+                if ('%23595959' == 'white'){
+                    logo.src = 'https://assets.reviews.io/img/all-global-assets/logo/reviewsio-logo--white.svg';
+                }
+
+                document.getElementsByClassName('ReviewsLogo')[0].appendChild(logo);
+            }
+
+            window.onresize = function(){
+                resize();
+            };
+
+
+            function resize(){
+                var bodyStyle = window.getComputedStyle(document.body);
+                var height = parseInt(bodyStyle.getPropertyValue("height")) + 5;
+
+                window.parent.postMessage(JSON.stringify({
+                    action: 'widget-resize',
+                    height: height,
+                    elementId: 'reviews-widget-summon-text-banner'
+                }),'*');
+            }
+
+            resize();
+        </script>
+        <style type="text/css">.ReviewsLogo--small .ReviewsLogo__text i {color:#595959 !important;}</style>
+    
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+  div.grammarly-desktop-integration {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+
+  div.grammarly-desktop-integration:before {
+    content: attr(data-content);
+  }
+</style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
