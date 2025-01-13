@@ -1,0 +1,27 @@
+refrigerator 1800 ( 1100 one )
+frige 1000
+washier 800 (400 one)
+airconditioner 1200 * 2
+bike 1100
+all other electric
+(water filter, dehumidifier, vacuum cleaner) 1000
+
+1100+1800+1000+800+400+2400+1100+1000*2+1000*2+1000 = 13600
+
+exercise equip 120.4kg * 6 = 723
+
+other
+4.7 * 1.3 * 2 = 12.22 m^3 * 1500 = 18330
+
+worker fee: 1000
+
+13600+18330+723+1000=33653
+
+
+packaging fee 50 * 37 = 1850 (hold on)
+
+me: 5000
+he: 800
+
+
+33653 - 5000 - 800 = 27853
